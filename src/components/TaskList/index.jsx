@@ -26,23 +26,33 @@ const TaskList = (props) => {
     <>
       <div>
         <h2>Tasks:</h2>
-        <ul>
+        <table>
+          <tbody>
           {todos.map((todo) => (
-            <li key={todo.id}>
-              <input
-                onChange={() => toggleTodoCompletion(todo.id)}
-                type="checkbox"
-                name="isDone"
-                id={todo.id}
-                checked={todo.isDone}
-              />
-              <span>{todo.text}</span>
-              {todo.isDone && (
-                <button onClick={() => removeTodo(todo.id)}>Remove task</button>
-              )}
-            </li>
+            <tr key={todo.id}>
+              <td>
+                <input
+                  onChange={() => toggleTodoCompletion(todo.id)}
+                  type="checkbox"
+                  name="isDone"
+                  id={todo.id}
+                  checked={todo.isDone}
+                />
+              </td>
+              <td>
+                <span>{todo.text}</span>
+              </td>
+              <td>
+                {todo.isDone && (
+                  <button onClick={() => removeTodo(todo.id)}>
+                    Remove task
+                  </button>
+                )}
+              </td>
+            </tr>
           ))}
-        </ul>
+          </tbody>
+        </table>
       </div>
     </>
   );
