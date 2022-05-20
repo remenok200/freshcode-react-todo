@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { Formik, Form, Field } from "formik";
+import { TODO_TASK_CHEMA } from "../utils/validationSchemas";
+import { ErrorMessage } from "formik";
+
 const ToDo = (props) => {
   const [todos, setTodos] = useState([]);
 
@@ -33,17 +36,22 @@ const ToDo = (props) => {
   };
 
   const onSubmit = (values, formikBag) => {
-    // todo
-    addTodo(values.text);
+    const castValues = TODO_TASK_CHEMA.cast(values); // чтобы записать результат работы .trim() в схеме валидации
+    addTodo(castValues.text);
     formikBag.resetForm();
   };
   return (
     <article>
       <div>
-        <Formik initialValues={{ text: "" }} onSubmit={onSubmit}>
+        <Formik
+          validationSchema={TODO_TASK_CHEMA}
+          initialValues={{ text: "" }}
+          onSubmit={onSubmit}
+        >
           <Form>
             <Field name="text" placeholder="todo text" />
             <button type="submit">Add task</button>
+            <ErrorMessage name="text" />
           </Form>
         </Formik>
       </div>
@@ -59,8 +67,10 @@ const ToDo = (props) => {
                 id={todo.id}
                 checked={todo.isDone}
               />
-              {todo.text}
-              <button onClick={() => removeTodo(todo.id)}>Remove task</button>
+              <span>{todo.text}</span>
+              {todo.isDone && (
+                <button onClick={() => removeTodo(todo.id)}>Remove task</button>
+              )}
             </li>
           ))}
         </ul>
