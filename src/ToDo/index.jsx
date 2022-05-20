@@ -14,7 +14,11 @@ const ToDo = (props) => {
   };
 
   const removeTodo = (id) => {
-    // filter
+    const temp = todos;
+    const newTodos = temp.filter((todo) => {
+      return todo.id !== id;
+    });
+    setTodos(newTodos);
   };
 
   const toggleTodoCompletion = (id) => {
@@ -56,6 +60,7 @@ const ToDo = (props) => {
                 checked={todo.isDone}
               />
               {todo.text}
+              <button onClick={() => removeTodo(todo.id)}>Remove task</button>
             </li>
           ))}
         </ul>
