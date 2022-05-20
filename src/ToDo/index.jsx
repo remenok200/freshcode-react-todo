@@ -18,7 +18,14 @@ const ToDo = (props) => {
   };
 
   const toggleTodoCompletion = (id) => {
-    // map
+    const temp = todos;
+    const newTodos = temp.map((todo) => {
+      if (todo.id === id) {
+        todo.isDone = !todo.isDone;
+      }
+      return todo;
+    });
+    setTodos(newTodos);
   };
 
   const onSubmit = (values, formikBag) => {
@@ -40,13 +47,13 @@ const ToDo = (props) => {
         <h2>Tasks:</h2>
         <ul>
           {todos.map((todo) => (
-            <li>
+            <li key={todo.id}>
               <input
+                onChange={() => toggleTodoCompletion(todo.id)}
                 type="checkbox"
                 name="isDone"
                 id={todo.id}
                 checked={todo.isDone}
-                disabled
               />
               {todo.text}
             </li>
