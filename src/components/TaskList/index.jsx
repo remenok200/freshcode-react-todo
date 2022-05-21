@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import ACTION_TYPES from "../ToDo/reducer/actionTypes";
 import RenderedTable from "./RenderedTable";
+import styles from "./TaskList.module.scss";
+import allIcon from "../../icons/all.svg";
+import completedIcon from "../../icons/completed.svg";
+import notCompletedIcon from "../../icons/notCompleted.svg";
 
 const TaskList = (props) => {
   const { state, dispatch } = props;
@@ -32,29 +36,32 @@ const TaskList = (props) => {
     <>
       <div>
         {state.todos.length === 0 ? (
-          <h2>No tasks =)</h2>
+          <h2 className={styles.noTask}>No tasks =)</h2>
         ) : (
           <>
             <button
+              className={styles.section}
               onClick={() => {
                 setMode("All");
               }}
             >
-              All tasks
+              <img src={allIcon} alt="all button" />
             </button>
             <button
+              className={styles.section}
               onClick={() => {
                 setMode("Completed");
               }}
             >
-              Completed tasks
+              <img src={completedIcon} alt="completed button" />
             </button>
             <button
+              className={styles.section}
               onClick={() => {
                 setMode("NotCompleted");
               }}
             >
-              Not completed tasks
+              <img src={notCompletedIcon} alt="not completed button" />
             </button>
 
             <RenderedTable

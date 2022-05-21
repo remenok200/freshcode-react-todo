@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { Field } from "formik";
 import { Form } from "formik";
 import { ErrorMessage } from "formik";
 import { Formik } from "formik";
 import { TODO_TASK_CHEMA } from "../../utils/validationSchemas";
 import ACTION_TYPES from "../ToDo/reducer/actionTypes";
+import styles from "./AddForm.module.scss";
+import addIcon from "../../icons/add.svg";
 
 const AddForm = (props) => {
+  const [addMode, setAddMode] = useState(false);
   const { state, dispatch } = props;
 
   const addTodo = (todoText) => {
@@ -27,10 +30,14 @@ const AddForm = (props) => {
         onSubmit={onSubmit}
       >
         <Form>
-          <Field name="text" placeholder="todo text" />
-          <button type="submit">Add task</button>
-          <ErrorMessage name="text" />
-        </Form>
+            <Field name="text" placeholder="Enter text new todo" />
+            <button type="submit" className={styles.section}>
+              <img src={addIcon} alt="add button" />
+            </button>
+            <div className={styles.error}>
+              <ErrorMessage name="text" />
+            </div>
+          </Form>
       </Formik>
     </>
   );

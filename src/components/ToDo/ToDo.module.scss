@@ -1,0 +1,13 @@
+body {
+  background: linear-gradient(
+    306deg,
+    rgba(232, 175, 195, 1) 50%,
+    rgba(251, 250, 225, 1) 50%
+  );
+}
+
+button:hover {
+  background-color: orange;
+  transition: 0.7s;
+  box-shadow: 10px 5px 5px black;
+}
