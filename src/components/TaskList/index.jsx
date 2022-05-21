@@ -34,7 +34,7 @@ const TaskList = (props) => {
 
   return (
     <>
-      <div>
+      <div className={styles.container}>
         {state.todos.length === 0 ? (
           <h2 className={styles.noTask}>No tasks =)</h2>
         ) : (
