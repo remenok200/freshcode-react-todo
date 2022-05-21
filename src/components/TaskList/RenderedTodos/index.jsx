@@ -46,6 +46,7 @@ const RenderedTodos = (props) => {
                     onChange={editTodoHandler}
                     type="text"
                     placeholder={todo.text}
+                    autoFocus
                   />
                 ) : (
                   <span
