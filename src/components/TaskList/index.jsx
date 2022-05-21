@@ -5,9 +5,11 @@ import NotCompletedTodos from "./NotCompletedTodos";
 import AllTodos from "./AllTodos";
 
 const TaskList = (props) => {
+  const { state, dispatch } = props;
+
   const [editID, setEditID] = useState(null);
   const [editText, setEditText] = useState(null);
-  const { state, dispatch } = props;
+  const [mode, setMode] = useState("All");
 
   const removeTodo = (id) => {
     dispatch({ type: ACTION_TYPES.REMOVE, id });
@@ -31,39 +33,46 @@ const TaskList = (props) => {
   return (
     <>
       <div>
+        <button onClick={() => {setMode('All')}}>All tasks</button>
+        <button onClick={() => {setMode('Completed')}}>Completed tasks</button>
+        <button onClick={() => {setMode('NotCompleted')}}>Not completed tasks</button>
         <h2>Tasks:</h2>
         {state.todos.length === 0 ? (
           <p>Заданий нет =)</p>
         ) : (
           <table>
             <tbody>
-              {/* <CompletedTodos
-                editTodo={editTodo}
-                setEditID={setEditID}
-                toggleTodoCompletion={toggleTodoCompletion}
-                editID={editID}
-                editTodoHandler={editTodoHandler}
-                removeTodo={removeTodo}
-                state={state}
-              /> */}
-              {/* <NotCompletedTodos
-                editTodo={editTodo}
-                setEditID={setEditID}
-                toggleTodoCompletion={toggleTodoCompletion}
-                editID={editID}
-                editTodoHandler={editTodoHandler}
-                removeTodo={removeTodo}
-                state={state}
-              /> */}
-              <AllTodos
-                editTodo={editTodo}
-                setEditID={setEditID}
-                toggleTodoCompletion={toggleTodoCompletion}
-                editID={editID}
-                editTodoHandler={editTodoHandler}
-                removeTodo={removeTodo}
-                state={state}
-              />
+              {mode === "All" ? (
+                <AllTodos
+                  editTodo={editTodo}
+                  setEditID={setEditID}
+                  toggleTodoCompletion={toggleTodoCompletion}
+                  editID={editID}
+                  editTodoHandler={editTodoHandler}
+                  removeTodo={removeTodo}
+                  state={state}
+                />
+              ) : mode === "Completed" ? (
+                <CompletedTodos
+                  editTodo={editTodo}
+                  setEditID={setEditID}
+                  toggleTodoCompletion={toggleTodoCompletion}
+                  editID={editID}
+                  editTodoHandler={editTodoHandler}
+                  removeTodo={removeTodo}
+                  state={state}
+                />
+              ) : (
+                <NotCompletedTodos
+                  editTodo={editTodo}
+                  setEditID={setEditID}
+                  toggleTodoCompletion={toggleTodoCompletion}
+                  editID={editID}
+                  editTodoHandler={editTodoHandler}
+                  removeTodo={removeTodo}
+                  state={state}
+                />
+              )}
             </tbody>
           </table>
         )}
