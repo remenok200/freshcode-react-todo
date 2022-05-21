@@ -3,6 +3,7 @@ import ACTION_TYPES from "../ToDo/reducer/actionTypes";
 
 const TaskList = (props) => {
   const { state, dispatch } = props;
+  console.log(state.todos)
 
   const removeTodo = (id) => {
     dispatch({ type: ACTION_TYPES.REMOVE, id });

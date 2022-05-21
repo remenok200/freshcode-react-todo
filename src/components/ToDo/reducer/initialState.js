@@ -1,5 +1,5 @@
 const initialState = {
-  todos: [],
+  todos: JSON.parse(localStorage.getItem("todos")) || [],
 };
 
 export default initialState;

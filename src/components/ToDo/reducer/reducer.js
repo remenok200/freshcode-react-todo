@@ -8,6 +8,15 @@ export default function reducer(state, action) {
         isDone: false,
         id: Date.now(),
       };
+
+      localStorage.setItem(
+        "todos",
+        JSON.stringify([
+          ...JSON.parse(localStorage.getItem("todos") || "[]"),
+          newTodo,
+        ])
+      );
+
       return {
         todos: [...state.todos, newTodo],
       };
@@ -17,6 +26,18 @@ export default function reducer(state, action) {
       const newTodos = temp.filter((todo) => {
         return todo.id !== action.id;
       });
+
+      localStorage.removeItem("todos");
+      newTodos.map((todo) => {
+        return localStorage.setItem(
+          "todos",
+          JSON.stringify([
+            ...JSON.parse(localStorage.getItem("todos") || "[]"),
+            todo,
+          ])
+        );
+      });
+
       return { todos: newTodos };
     }
     case ACTION_TYPES.TOGGLE: {
@@ -27,6 +48,18 @@ export default function reducer(state, action) {
         }
         return todo;
       });
+
+      localStorage.removeItem("todos");
+      newTodos.map((todo) => {
+        return localStorage.setItem(
+          "todos",
+          JSON.stringify([
+            ...JSON.parse(localStorage.getItem("todos") || "[]"),
+            todo,
+          ])
+        );
+      });
+
       return { todos: newTodos };
     }
     default:
