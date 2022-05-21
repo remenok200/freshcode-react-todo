@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ACTION_TYPES from "../ToDo/reducer/actionTypes";
 import CompletedTodos from "./CompletedTodos";
 import NotCompletedTodos from "./NotCompletedTodos";
+import AllTodos from "./AllTodos";
 
 const TaskList = (props) => {
   const [editID, setEditID] = useState(null);
@@ -45,7 +46,16 @@ const TaskList = (props) => {
                 removeTodo={removeTodo}
                 state={state}
               /> */}
-              <NotCompletedTodos
+              {/* <NotCompletedTodos
+                editTodo={editTodo}
+                setEditID={setEditID}
+                toggleTodoCompletion={toggleTodoCompletion}
+                editID={editID}
+                editTodoHandler={editTodoHandler}
+                removeTodo={removeTodo}
+                state={state}
+              /> */}
+              <AllTodos
                 editTodo={editTodo}
                 setEditID={setEditID}
                 toggleTodoCompletion={toggleTodoCompletion}
