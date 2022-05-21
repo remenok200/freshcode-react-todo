@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useReducer} from "react";
 import AddForm from "../AddForm";
 import TaskList from "../TaskList";
+import reducer from "./reducer/reducer";
+import initialState from './reducer/initialState'
 
 const ToDo = () => {
-  const [todos, setTodos] = useState([]);
+  const [state, dispatch] = useReducer(reducer, initialState)
 
   return (
     <>
-      <AddForm todos={todos} setTodos={setTodos} />
-      <TaskList todos={todos} setTodos={setTodos} />
+      <AddForm state={state} dispatch={dispatch} />
+      <TaskList state={state} dispatch={dispatch} />
     </>
   );
 };

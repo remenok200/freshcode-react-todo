@@ -4,18 +4,13 @@ import { Form } from "formik";
 import { ErrorMessage } from "formik";
 import { Formik } from "formik";
 import { TODO_TASK_CHEMA } from "../../utils/validationSchemas";
+import ACTION_TYPES from "../ToDo/reducer/actionTypes";
 
 const AddForm = (props) => {
-  const { todos, setTodos } = props;
+  const { state, dispatch } = props;
 
   const addTodo = (todoText) => {
-    const newTodo = {
-      text: todoText,
-      isDone: false,
-      id: Date.now(),
-    };
-
-    setTodos([...todos, newTodo]);
+    dispatch({ type: ACTION_TYPES.ADD, text: todoText });
   };
 
   const onSubmit = (values, formikBag) => {

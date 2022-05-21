@@ -1,25 +1,15 @@
 import React from "react";
+import ACTION_TYPES from "../ToDo/reducer/actionTypes";
 
 const TaskList = (props) => {
-  const { todos, setTodos } = props;
+  const { state, dispatch } = props;
 
   const removeTodo = (id) => {
-    const temp = todos;
-    const newTodos = temp.filter((todo) => {
-      return todo.id !== id;
-    });
-    setTodos(newTodos);
+    dispatch({ type: ACTION_TYPES.REMOVE, id });
   };
 
   const toggleTodoCompletion = (id) => {
-    const temp = todos;
-    const newTodos = temp.map((todo) => {
-      if (todo.id === id) {
-        todo.isDone = !todo.isDone;
-      }
-      return todo;
-    });
-    setTodos(newTodos);
+    dispatch({ type: ACTION_TYPES.TOGGLE, id });
   };
 
   return (
@@ -28,29 +18,29 @@ const TaskList = (props) => {
         <h2>Tasks:</h2>
         <table>
           <tbody>
-          {todos.map((todo) => (
-            <tr key={todo.id}>
-              <td>
-                <input
-                  onChange={() => toggleTodoCompletion(todo.id)}
-                  type="checkbox"
-                  name="isDone"
-                  id={todo.id}
-                  checked={todo.isDone}
-                />
-              </td>
-              <td>
-                <span>{todo.text}</span>
-              </td>
-              <td>
-                {todo.isDone && (
-                  <button onClick={() => removeTodo(todo.id)}>
-                    Remove task
-                  </button>
-                )}
-              </td>
-            </tr>
-          ))}
+            {state.todos.map((todo) => (
+              <tr key={todo.id}>
+                <td>
+                  <input
+                    onChange={() => toggleTodoCompletion(todo.id)}
+                    type="checkbox"
+                    name="isDone"
+                    id={todo.id}
+                    checked={todo.isDone}
+                  />
+                </td>
+                <td>
+                  <span>{todo.text}</span>
+                </td>
+                <td>
+                  {todo.isDone && (
+                    <button onClick={() => removeTodo(todo.id)}>
+                      Remove task
+                    </button>
+                  )}
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
