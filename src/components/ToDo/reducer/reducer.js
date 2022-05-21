@@ -1,3 +1,5 @@
+import rewriteLocalStorage from "../../../utils/rewriteLocalStorage";
+import writeLocalStorage from "../../../utils/writeLocalStorage";
 import ACTION_TYPES from "./actionTypes";
 
 export default function reducer(state, action) {
@@ -9,13 +11,7 @@ export default function reducer(state, action) {
         id: Date.now(),
       };
 
-      localStorage.setItem(
-        "todos",
-        JSON.stringify([
-          ...JSON.parse(localStorage.getItem("todos") || "[]"),
-          newTodo,
-        ])
-      );
+      writeLocalStorage(newTodo);
 
       return {
         todos: [...state.todos, newTodo],
@@ -27,16 +23,7 @@ export default function reducer(state, action) {
         return todo.id !== action.id;
       });
 
-      localStorage.removeItem("todos");
-      newTodos.map((todo) => {
-        return localStorage.setItem(
-          "todos",
-          JSON.stringify([
-            ...JSON.parse(localStorage.getItem("todos") || "[]"),
-            todo,
-          ])
-        );
-      });
+      rewriteLocalStorage(newTodos);
 
       return { todos: newTodos };
     }
@@ -49,16 +36,7 @@ export default function reducer(state, action) {
         return todo;
       });
 
-      localStorage.removeItem("todos");
-      newTodos.map((todo) => {
-        return localStorage.setItem(
-          "todos",
-          JSON.stringify([
-            ...JSON.parse(localStorage.getItem("todos") || "[]"),
-            todo,
-          ])
-        );
-      });
+      rewriteLocalStorage(newTodos);
 
       return { todos: newTodos };
     }
@@ -71,16 +49,7 @@ export default function reducer(state, action) {
         return todo;
       });
 
-      localStorage.removeItem("todos");
-      newTodos.map((todo) => {
-        return localStorage.setItem(
-          "todos",
-          JSON.stringify([
-            ...JSON.parse(localStorage.getItem("todos") || "[]"),
-            todo,
-          ])
-        );
-      });
+      rewriteLocalStorage(newTodos);
 
       return { todos: newTodos };
     }
