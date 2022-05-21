@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import ACTION_TYPES from "../ToDo/reducer/actionTypes";
-import CompletedTodos from "./CompletedTodos";
-import NotCompletedTodos from "./NotCompletedTodos";
-import AllTodos from "./AllTodos";
+import RenderedTable from "./RenderedTable";
 
 const TaskList = (props) => {
   const { state, dispatch } = props;
@@ -33,48 +31,43 @@ const TaskList = (props) => {
   return (
     <>
       <div>
-        <button onClick={() => {setMode('All')}}>All tasks</button>
-        <button onClick={() => {setMode('Completed')}}>Completed tasks</button>
-        <button onClick={() => {setMode('NotCompleted')}}>Not completed tasks</button>
-        <h2>Tasks:</h2>
         {state.todos.length === 0 ? (
-          <p>Заданий нет =)</p>
+          <h2>No tasks =)</h2>
         ) : (
-          <table>
-            <tbody>
-              {mode === "All" ? (
-                <AllTodos
-                  editTodo={editTodo}
-                  setEditID={setEditID}
-                  toggleTodoCompletion={toggleTodoCompletion}
-                  editID={editID}
-                  editTodoHandler={editTodoHandler}
-                  removeTodo={removeTodo}
-                  state={state}
-                />
-              ) : mode === "Completed" ? (
-                <CompletedTodos
-                  editTodo={editTodo}
-                  setEditID={setEditID}
-                  toggleTodoCompletion={toggleTodoCompletion}
-                  editID={editID}
-                  editTodoHandler={editTodoHandler}
-                  removeTodo={removeTodo}
-                  state={state}
-                />
-              ) : (
-                <NotCompletedTodos
-                  editTodo={editTodo}
-                  setEditID={setEditID}
-                  toggleTodoCompletion={toggleTodoCompletion}
-                  editID={editID}
-                  editTodoHandler={editTodoHandler}
-                  removeTodo={removeTodo}
-                  state={state}
-                />
-              )}
-            </tbody>
-          </table>
+          <>
+            <button
+              onClick={() => {
+                setMode("All");
+              }}
+            >
+              All tasks
+            </button>
+            <button
+              onClick={() => {
+                setMode("Completed");
+              }}
+            >
+              Completed tasks
+            </button>
+            <button
+              onClick={() => {
+                setMode("NotCompleted");
+              }}
+            >
+              Not completed tasks
+            </button>
+
+            <RenderedTable
+              editTodo={editTodo}
+              setEditID={setEditID}
+              toggleTodoCompletion={toggleTodoCompletion}
+              editID={editID}
+              editTodoHandler={editTodoHandler}
+              removeTodo={removeTodo}
+              state={state}
+              mode={mode}
+            />
+          </>
         )}
       </div>
     </>

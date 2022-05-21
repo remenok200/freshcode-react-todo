@@ -10,6 +10,7 @@ const NotCompletedTodos = (props) => {
     editTodoHandler,
     removeTodo,
     state,
+    text = " not completed",
   } = props;
 
   const temp = state.todos;
@@ -26,6 +27,7 @@ const NotCompletedTodos = (props) => {
       editTodoHandler={editTodoHandler}
       removeTodo={removeTodo}
       state={notCompletedTodos}
+      text={text}
     />
   );
 };

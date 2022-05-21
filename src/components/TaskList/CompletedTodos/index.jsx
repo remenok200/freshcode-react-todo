@@ -10,13 +10,13 @@ const CompletedTodos = (props) => {
     editTodoHandler,
     removeTodo,
     state,
+    text = " completed",
   } = props;
-  
-    const temp = state.todos;
-    const completedTodos = temp.filter((todo) => {
-      return todo.isDone;
-    });
-  
+
+  const temp = state.todos;
+  const completedTodos = temp.filter((todo) => {
+    return todo.isDone;
+  });
 
   return (
     <RenderedTodos
@@ -27,6 +27,7 @@ const CompletedTodos = (props) => {
       editTodoHandler={editTodoHandler}
       removeTodo={removeTodo}
       state={completedTodos}
+      text={text}
     />
   );
 };
