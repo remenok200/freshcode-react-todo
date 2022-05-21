@@ -62,6 +62,28 @@ export default function reducer(state, action) {
 
       return { todos: newTodos };
     }
+    case ACTION_TYPES.EDIT: {
+      const temp = state.todos;
+      const newTodos = temp.map((todo) => {
+        if (todo.id === action.id) {
+          todo.text = action.text;
+        }
+        return todo;
+      });
+
+      localStorage.removeItem("todos");
+      newTodos.map((todo) => {
+        return localStorage.setItem(
+          "todos",
+          JSON.stringify([
+            ...JSON.parse(localStorage.getItem("todos") || "[]"),
+            todo,
+          ])
+        );
+      });
+
+      return { todos: newTodos };
+    }
     default:
       return { ...state };
   }
