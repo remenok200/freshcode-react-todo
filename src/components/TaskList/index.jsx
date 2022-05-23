@@ -5,6 +5,7 @@ import styles from "./TaskList.module.scss";
 import allIcon from "../../icons/all.svg";
 import completedIcon from "../../icons/completed.svg";
 import notCompletedIcon from "../../icons/notCompleted.svg";
+import mona from "../../icons/mona.gif";
 import { TODO_TASK_CHEMA } from "../../utils/validationSchemas";
 
 const TaskList = (props) => {
@@ -48,7 +49,10 @@ const TaskList = (props) => {
     <>
       <div className={styles.container}>
         {state.todos.length === 0 ? (
-          <h2 className={styles.noTask}>No tasks =)</h2>
+          <div>
+            <h2 className={styles.noTask}>No tasks =)</h2>
+            <img src={mona} alt="mona gif" />
+          </div>
         ) : (
           <>
             <button
