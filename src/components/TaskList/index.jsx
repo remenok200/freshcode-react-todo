@@ -24,7 +24,7 @@ const TaskList = (props) => {
   };
 
   const editTodo = (id) => {
-    const text = editText;
+    let text = editText;
 
     try {
       TODO_TASK_CHEMA.validateSync({ text });
@@ -33,9 +33,10 @@ const TaskList = (props) => {
       throw new Error(e);
     }
 
+    text = TODO_TASK_CHEMA.cast({ text }); // чтобы записать результат работы .trim() в схеме валидации
     setIsEditError(false);
     setEditID(null);
-    dispatch({ type: ACTION_TYPES.EDIT, id, text });
+    dispatch({ type: ACTION_TYPES.EDIT, id, ...text });
     setEditText(null);
   };
 
