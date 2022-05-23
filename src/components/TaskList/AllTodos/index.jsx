@@ -10,6 +10,7 @@ const AllTodos = (props) => {
     editTodoHandler,
     removeTodo,
     state,
+    isEditError
   } = props;
 
   return (
@@ -21,6 +22,7 @@ const AllTodos = (props) => {
       editTodoHandler={editTodoHandler}
       removeTodo={removeTodo}
       state={state.todos}
+      isEditError={isEditError}
     />
   );
 };

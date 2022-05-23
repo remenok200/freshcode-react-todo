@@ -11,6 +11,7 @@ const NotCompletedTodos = (props) => {
     removeTodo,
     state,
     text = " not completed",
+    isEditError
   } = props;
 
   const temp = state.todos;
@@ -28,6 +29,7 @@ const NotCompletedTodos = (props) => {
       removeTodo={removeTodo}
       state={notCompletedTodos}
       text={text}
+      isEditError={isEditError}
     />
   );
 };

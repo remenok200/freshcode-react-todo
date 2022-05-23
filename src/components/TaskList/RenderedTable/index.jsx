@@ -13,6 +13,7 @@ const RenderedTable = (props) => {
     removeTodo,
     state,
     mode,
+    isEditError
   } = props;
   
   return (
@@ -26,6 +27,7 @@ const RenderedTable = (props) => {
           editTodoHandler={editTodoHandler}
           removeTodo={removeTodo}
           state={state}
+          isEditError={isEditError}
         />
       ) : mode === "Completed" ? (
         <CompletedTodos
@@ -36,6 +38,7 @@ const RenderedTable = (props) => {
           editTodoHandler={editTodoHandler}
           removeTodo={removeTodo}
           state={state}
+          isEditError={isEditError}
         />
       ) : (
         <NotCompletedTodos
@@ -46,6 +49,7 @@ const RenderedTable = (props) => {
           editTodoHandler={editTodoHandler}
           removeTodo={removeTodo}
           state={state}
+          isEditError={isEditError}
         />
       )}
     </>

@@ -16,6 +16,7 @@ const RenderedTodos = (props) => {
     removeTodo,
     state,
     text,
+    isEditError,
   } = props;
 
   return (
@@ -47,6 +48,9 @@ const RenderedTodos = (props) => {
                     type="text"
                     placeholder={todo.text}
                     autoFocus
+                    className={cx({
+                      [styles.editError]: isEditError,
+                    })}
                   />
                 ) : (
                   <span

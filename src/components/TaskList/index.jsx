@@ -5,12 +5,14 @@ import styles from "./TaskList.module.scss";
 import allIcon from "../../icons/all.svg";
 import completedIcon from "../../icons/completed.svg";
 import notCompletedIcon from "../../icons/notCompleted.svg";
+import { TODO_TASK_CHEMA } from "../../utils/validationSchemas";
 
 const TaskList = (props) => {
   const { state, dispatch } = props;
 
   const [editID, setEditID] = useState(null);
   const [editText, setEditText] = useState(null);
+  const [isEditError, setIsEditError] = useState(false);
   const [mode, setMode] = useState("All");
 
   const removeTodo = (id) => {
@@ -23,6 +25,15 @@ const TaskList = (props) => {
 
   const editTodo = (id) => {
     const text = editText;
+
+    try {
+      TODO_TASK_CHEMA.validateSync({ text });
+    } catch (e) {
+      setIsEditError(true);
+      throw new Error(e);
+    }
+
+    setIsEditError(false);
     setEditID(null);
     dispatch({ type: ACTION_TYPES.EDIT, id, text });
     setEditText(null);
@@ -45,7 +56,7 @@ const TaskList = (props) => {
                 setMode("All");
               }}
             >
-              <img src={allIcon} alt="all button" />
+              <img src={allIcon} alt="all button" />- All
             </button>
             <button
               className={styles.section}
@@ -53,7 +64,7 @@ const TaskList = (props) => {
                 setMode("Completed");
               }}
             >
-              <img src={completedIcon} alt="completed button" />
+              <img src={completedIcon} alt="completed button" />- Completed
             </button>
             <button
               className={styles.section}
@@ -61,7 +72,8 @@ const TaskList = (props) => {
                 setMode("NotCompleted");
               }}
             >
-              <img src={notCompletedIcon} alt="not completed button" />
+              <img src={notCompletedIcon} alt="not completed button" />- Not
+              completed
             </button>
 
             <RenderedTable
@@ -73,6 +85,7 @@ const TaskList = (props) => {
               removeTodo={removeTodo}
               state={state}
               mode={mode}
+              isEditError={isEditError}
             />
           </>
         )}
