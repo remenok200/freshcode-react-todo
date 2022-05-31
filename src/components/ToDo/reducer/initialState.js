@@ -1,5 +1,7 @@
+import getLocalStorage from '../../../utils/getLocalStorage'
+
 const initialState = {
-  todos: JSON.parse(localStorage.getItem("todos")) || [],
+  todos: getLocalStorage(),
 };
 
 export default initialState;
