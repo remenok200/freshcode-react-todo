@@ -27,7 +27,7 @@ const RenderedTodos = (props) => {
           {state.map((todo) => (
             <tr key={todo.id}>
               <td>
-                <div class="pretty p-icon p-jelly p-round p-bigger">
+                <div className="pretty p-icon p-jelly p-round p-bigger">
                   <input
                     type="checkbox"
                     onChange={() => toggleTodoCompletion(todo.id)}
@@ -35,8 +35,8 @@ const RenderedTodos = (props) => {
                     id={todo.id}
                     checked={todo.isDone}
                   />
-                  <div class="state p-success">
-                    <i class="icon mdi mdi-check">d</i>
+                  <div className="state p-success">
+                    <i className="icon mdi mdi-check">d</i>
                     <label></label>
                   </div>
                 </div>
@@ -85,7 +85,7 @@ const RenderedTodos = (props) => {
         </tbody>
       </table>
       <p className={styles.count}>
-        Number of{text} tasks: {state.length}
+        {`Number of ${text} tasks: ${state.length}`}
       </p>
     </>
   );

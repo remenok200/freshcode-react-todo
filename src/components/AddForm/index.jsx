@@ -9,8 +9,9 @@ import styles from "./AddForm.module.scss";
 import addIcon from "../../icons/add.svg";
 
 const AddForm = (props) => {
-  const [addMode, setAddMode] = useState(false);
-  const { state, dispatch } = props;
+  const { 
+    reducerData: [state, dispatch],
+   } = props;
 
   const addTodo = (todoText) => {
     dispatch({ type: ACTION_TYPES.ADD, text: todoText });
@@ -34,9 +35,7 @@ const AddForm = (props) => {
             <button type="submit" className={styles.section}>
               <img src={addIcon} alt="add button" />
             </button>
-            <div className={styles.error}>
-              <ErrorMessage name="text" />
-            </div>
+              <ErrorMessage name="text" className={styles.error} component="p" />
           </Form>
       </Formik>
     </>

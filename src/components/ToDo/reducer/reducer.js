@@ -41,8 +41,7 @@ export default function reducer(state, action) {
       return { todos: newTodos };
     }
     case ACTION_TYPES.EDIT: {
-      const temp = state.todos;
-      const newTodos = temp.map((todo) => {
+      const newTodos = state.todos.map((todo) => {
         if (todo.id === action.id) {
           todo.text = action.text;
         }

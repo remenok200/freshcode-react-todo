@@ -6,12 +6,12 @@ import initialState from "./reducer/initialState";
 import styles from "./ToDo.module.scss";
 
 const ToDo = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const reducerData = useReducer(reducer, initialState);
 
   return (
     <>
-      <AddForm state={state} dispatch={dispatch} />
-      <TaskList state={state} dispatch={dispatch} />
+      <AddForm reducerData={reducerData} />
+      <TaskList reducerData={reducerData} />
     </>
   );
 };

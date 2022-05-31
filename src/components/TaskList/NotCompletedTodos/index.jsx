@@ -1,37 +1,14 @@
-import React from "react";
-import RenderedTodos from "../RenderedTodos";
+import React from 'react';
+import RenderedTodos from '../RenderedTodos';
 
-const NotCompletedTodos = (props) => {
-  const {
-    editTodo,
-    setEditID,
-    toggleTodoCompletion,
-    editID,
-    editTodoHandler,
-    removeTodo,
-    state,
-    text = " not completed",
-    isEditError
-  } = props;
+const NotCompletedTodos = props => {
+  const { state, text = 'not completed', ...rest } = props;
 
-  const temp = state.todos;
-  const notCompletedTodos = temp.filter((todo) => {
+  const notCompletedTodos = state.todos.filter(todo => {
     return !todo.isDone;
   });
 
-  return (
-    <RenderedTodos
-      editTodo={editTodo}
-      setEditID={setEditID}
-      toggleTodoCompletion={toggleTodoCompletion}
-      editID={editID}
-      editTodoHandler={editTodoHandler}
-      removeTodo={removeTodo}
-      state={notCompletedTodos}
-      text={text}
-      isEditError={isEditError}
-    />
-  );
+  return <RenderedTodos state={notCompletedTodos} text={text} {...rest} />;
 };
 
 export default NotCompletedTodos;
